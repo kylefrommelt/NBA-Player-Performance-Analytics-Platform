@@ -1334,5 +1334,3 @@ class NBAFeatureEngineer:
         except Exception as e:
             self.logger.error(f"Error in feature creation: {str(e)}")
             raise
-
-    # Add other feature creation methods as needed
