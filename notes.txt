@@ -1,0 +1,183 @@
+# Complete Column Reference Guide
+
+1. Today's Games (data/raw/today_games.csv)
+- GAME_DATE_EST: Game date
+- GAME_SEQUENCE: Order of games
+- GAME_ID: Unique identifier
+- GAME_STATUS_ID: Status code
+- GAME_STATUS_TEXT: Current game status
+- GAMECODE: Unique game code
+- HOME_TEAM_ID: Home team identifier
+- VISITOR_TEAM_ID: Away team identifier
+- SEASON: Season year
+- LIVE_PERIOD: Current period
+- LIVE_PC_TIME: Time remaining
+- NATL_TV_BROADCASTER_ABBREVIATION: National TV info
+- HOME_TV_BROADCASTER_ABBREVIATION: Home broadcast
+- AWAY_TV_BROADCASTER_ABBREVIATION: Away broadcast
+- ARENA_NAME: Game venue
+
+2. Team Stats (data/raw/team_stats.csv)
+- TEAM_ID: Team identifier
+- TEAM_NAME: Team name
+- GP: Games played
+- W, L: Wins, Losses
+- W_PCT: Win percentage
+- MIN: Minutes played
+- FGM, FGA, FG_PCT: Field goal stats
+- FG3M, FG3A, FG3_PCT: 3-point stats
+- FTM, FTA, FT_PCT: Free throw stats
+- OREB, DREB, REB: Rebounding stats
+- AST: Assists
+- TOV: Turnovers
+- STL: Steals
+- BLK: Blocks
+- BLKA: Blocked attempts
+- PF, PFD: Fouls
+- PTS: Points
+- PLUS_MINUS: Plus/minus rating
+- [Various rank columns for each stat]
+
+3. Last 6 Games (data/raw/team_last_6_games.csv)
+[Same columns as team_stats but for last 6 games]
+
+4. Defensive Stats (data/raw/team_defensive_stats.csv)
+- DEF_RATING: Defensive rating
+- DREB_PCT: Defensive rebound percentage
+- STL: Steals
+- BLK: Blocks
+- OPP_PTS_OFF_TOV: Opposition points off turnovers
+- OPP_PTS_2ND_CHANCE: Second chance points allowed
+- OPP_PTS_FB: Fast break points allowed
+- OPP_PTS_PAINT: Paint points allowed
+
+5. Clutch Stats (data/raw/team_clutch_stats.csv)
+[Similar to team_stats but in clutch situations]
+
+6. Shooting Stats (data/raw/shooting_stats.csv)
+- PLAYER_ID, PLAYER_NAME
+- Zones:
+  - Restricted Area
+  - In The Paint (Non-RA)
+  - Mid-Range
+  - Left Corner 3
+  - Right Corner 3
+  - Above the Break 3
+  - Backcourt
+[Each zone has FGM, FGA, FG_PCT]
+
+7. Player Stats (data/raw/player_stats.csv)
+[Similar to team_stats but player-specific]
+Additional columns:
+- AGE
+- NICKNAME
+- NBA_FANTASY_PTS
+- DD2: Double-doubles
+- TD3: Triple-doubles
+
+8. Lineup Stats (data/raw/lineup_stats.csv)
+- GROUP_SET
+- GROUP_ID
+- GROUP_NAME
+[Plus all standard statistical columns]
+
+9. Injury Report (data/raw/injury_report.csv)
+- team
+- player
+- position
+- injury
+- status
+- date_collected
+
+10. Rest Days Impact (data/raw/rest_days_impact.csv)
+- team_id
+- days_rest
+- avg_points
+- avg_fg_pct
+- win_pct
+- plus_minus
+
+11. Home/Away Games (data/raw/home_games.csv, away_games.csv)
+[Same columns as team_stats but split by home/away]
+
+12. Defense vs Position (data/raw/defense_vs_position.csv)
+- CLOSE_DEF_PERSON_ID
+- PLAYER_NAME
+- PLAYER_POSITION
+- D_FGM, D_FGA, D_FG_PCT
+- NORMAL_FG_PCT
+- PCT_PLUSMINUS
+
+13. Head to Head Stats (data/raw/head_to_head_stats.csv)
+- TEAM_ID
+- OPPONENT_ID
+- WL
+- PTS
+- PLUS_MINUS
+- FG_PCT
+- FG3_PCT
+
+14. Arena Factors (data/raw/arena_factors.csv)
+- TEAM_ID
+- MATCHUP
+- PTS
+- FG_PCT
+- FG3_PCT
+- FT_PCT
+- PLUS_MINUS
+- ALTITUDE
+
+15. Daily Props (data/raw/daily_props.csv)
+- game_id: Unique identifier for the game
+- home_team: Home team name
+- away_team: Away team name
+- commence_time: Game start time (ISO format)
+- market: Type of prop bet
+  - player_points: Points
+  - player_rebounds: Rebounds
+  - player_assists: Assists
+  - player_threes: Three-pointers made
+  - player_points_rebounds: Points + Rebounds combined
+  - player_points_assists: Points + Assists combined
+  - player_points_rebounds_assists: Points + Rebounds + Assists combined
+- player: Player name
+- line: The over/under line for the prop
+- over_price: Odds for the over (decimal format)
+- under_price: Odds for the under (decimal format)
+- timestamp: When the odds were collected
+
+
+
+
+
+ Focus on minutes correlation when evaluating props
+Consider player consistency scores when making picks
+Pay attention to rest patterns and home/away splits
+Defense quality has minimal impact - don't overweight matchups
+
+
+Gradient Boosting (high performance with tabular data)
+Ensemble methods (given the different types of patterns)
+Neural Networks (for complex pattern recognition)
+
+1. Feature Engineering:
+   - Create composite features from minutes + role combinations
+   - Add rolling averages (7-day, 14-day, 30-day)
+   - Engineer "form" indicators based on consistency patterns
+
+2. Data Preparation:
+   - Split data into training/validation/test sets by date
+   - Normalize/standardize numerical features
+   - Encode categorical variables (teams, positions, roles)
+
+3. Target Variable Selection:
+   - Consider binary classification (over/under)
+   - Or regression for exact values
+   - Possibly multi-class for ranges
+
+
+   Focus on recent form metrics as they show the strongest predictive power
+2. Consider role-based analysis when evaluating players
+Don't overweight rest days in analysis
+Address missing data issues, particularly in matchup statistics
+Monitor the high-consistency players (38) more closely for potential opportunities
